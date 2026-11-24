@@ -1,0 +1,36 @@
+# Free Pascal / Lazarus build artifacts
+*.o
+*.ppu
+*.a
+*.compiled
+*.or
+*.rsj
+*.lps
+lazarus_app/lib/
+lazarus_app/backup/
+lazarus_app/KneeExtensionLaz
+lazarus_app/KneeExtensionLaz.res
+tests/test_biomech
+
+# Delphi build artifacts
+*.dcu
+*.dcp
+*.bpl
+*.exe
+*.dll
+*.local
+*.identcache
+*.stat
+*.dsk
+*.tvsconfig
+*.rsm
+*.map
+*.drc
+*.~*
+Win32/
+Win64/
+__history/
+__recovery/
+
+# Local assignment PDF
+*.pdf

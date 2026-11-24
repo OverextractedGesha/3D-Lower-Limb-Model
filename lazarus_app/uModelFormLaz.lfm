@@ -1,0 +1,83 @@
+object ModelFormLaz: TModelFormLaz
+  Left = 200
+  Height = 560
+  Top = 120
+  Width = 760
+  Caption = '3-Joint Lower Limb Model Parameters'
+  ClientHeight = 560
+  ClientWidth = 760
+  Position = poMainFormCenter
+  object pnlTop: TPanel
+    Left = 0
+    Height = 52
+    Top = 0
+    Width = 760
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 52
+    ClientWidth = 760
+    TabOrder = 0
+    object lblBW: TLabel
+      Left = 16
+      Height = 16
+      Top = 18
+      Width = 104
+      Caption = 'Body Weight (kg):'
+    end
+    object edtBW: TEdit
+      Left = 132
+      Height = 28
+      Top = 12
+      Width = 84
+      TabOrder = 0
+      Text = '70'
+    end
+    object lblBH: TLabel
+      Left = 236
+      Height = 16
+      Top = 18
+      Width = 106
+      Caption = 'Body Height (cm):'
+    end
+    object edtBH: TEdit
+      Left = 352
+      Height = 28
+      Top = 12
+      Width = 84
+      TabOrder = 1
+      Text = '175'
+    end
+    object btnApply: TButton
+      Left = 464
+      Height = 28
+      Top = 12
+      Width = 116
+      Caption = 'Apply & Compute'
+      TabOrder = 2
+      OnClick = btnApplyClick
+    end
+    object btnClose: TButton
+      Left = 592
+      Height = 28
+      Top = 12
+      Width = 96
+      Caption = 'Close'
+      TabOrder = 3
+      OnClick = btnCloseClick
+    end
+  end
+  object memoModel: TMemo
+    Left = 0
+    Height = 508
+    Top = 52
+    Width = 760
+    Align = alClient
+    Font.Name = 'Monospace'
+    Font.Size = 10
+    ParentFont = False
+    ReadOnly = True
+    ScrollBars = ssBoth
+    TabOrder = 1
+    WordWrap = False
+  end
+end
