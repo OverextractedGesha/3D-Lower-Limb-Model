@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  uBiomechTypes, uAnthropometry, uLagrange3DOF;
+  uBiomechCore;
 
 type
   TModelFormLaz = class(TForm)

@@ -6,7 +6,7 @@ program test_biomech;
 
 uses
   SysUtils, Math,
-  uBiomechTypes, uAnthropometry, uLagrange3DOF, uKneeSimEngine;
+  uBiomechCore;
 
 var
   PassCount: Integer = 0;

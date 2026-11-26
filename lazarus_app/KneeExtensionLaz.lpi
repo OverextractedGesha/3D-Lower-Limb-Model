@@ -15,12 +15,8 @@
     <MacroValues Count="1">
       <Macro1 Name="LCLWidgetType" Value="qt6"/>
     </MacroValues>
-    <BuildModes Count="1">
-      <Item1 Name="Default" Default="True">
-        <MacroValues Count="1">
-          <Macro1 Name="LCLWidgetType" Value="qt6"/>
-        </MacroValues>
-      </Item1>
+    <BuildModes>
+      <Item Name="Default" Default="True"/>
       <SharedMatrixOptions Count="1">
         <Item1 ID="100000000001" Modes="Default" Type="IDEMacro" MacroName="LCLWidgetType" Value="qt6"/>
       </SharedMatrixOptions>
@@ -32,49 +28,37 @@
     <RunParams>
       <FormatVersion Value="2"/>
     </RunParams>
-    <RequiredPackages Count="2">
-      <Item1>
+    <RequiredPackages>
+      <Item>
         <PackageName Value="TAChartLazarusPkg"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <PackageName Value="LCL"/>
-      </Item2>
+      </Item>
     </RequiredPackages>
-    <Units Count="7">
-      <Unit0>
+    <Units>
+      <Unit>
         <Filename Value="KneeExtensionLaz.lpr"/>
         <IsPartOfProject Value="True"/>
-      </Unit0>
-      <Unit1>
+      </Unit>
+      <Unit>
         <Filename Value="uMainFormLaz.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MainFormLaz"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit1>
-      <Unit2>
+      </Unit>
+      <Unit>
         <Filename Value="uModelFormLaz.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ModelFormLaz"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit2>
-      <Unit3>
-        <Filename Value="../shared/uBiomechTypes.pas"/>
+      </Unit>
+      <Unit>
+        <Filename Value="../shared/uBiomechCore.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit3>
-      <Unit4>
-        <Filename Value="../shared/uAnthropometry.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit4>
-      <Unit5>
-        <Filename Value="../shared/uLagrange3DOF.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit5>
-      <Unit6>
-        <Filename Value="../shared/uKneeSimEngine.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit6>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -93,25 +77,27 @@
       </SyntaxOptions>
     </Parsing>
     <Linking>
+      <Debugging>
+        <DebugInfoType Value="dsDwarf3"/>
+      </Debugging>
       <Options>
         <Win32>
           <GraphicApplication Value="True"/>
         </Win32>
       </Options>
     </Linking>
-    <LCLWidgetType Value="qt6"/>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="3">
-      <Item1>
+    <Exceptions>
+      <Item>
         <Name Value="EAbort"/>
-      </Item1>
-      <Item2>
+      </Item>
+      <Item>
         <Name Value="ECodetoolError"/>
-      </Item2>
-      <Item3>
+      </Item>
+      <Item>
         <Name Value="EFOpenError"/>
-      </Item3>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>

@@ -45,10 +45,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\shared\uBiomechTypes.pas"/>
-        <DCCReference Include="..\shared\uAnthropometry.pas"/>
-        <DCCReference Include="..\shared\uLagrange3DOF.pas"/>
-        <DCCReference Include="..\shared\uKneeSimEngine.pas"/>
+        <DCCReference Include="..\shared\uBiomechCore.pas"/>
         <DCCReference Include="uMainFormDelphi.pas">
             <Form>MainFormDelphi</Form>
         </DCCReference>

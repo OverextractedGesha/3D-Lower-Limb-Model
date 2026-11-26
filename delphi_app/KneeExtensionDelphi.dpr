@@ -2,10 +2,7 @@ program KneeExtensionDelphi;
 
 uses
   Vcl.Forms,
-  uBiomechTypes in '..\shared\uBiomechTypes.pas',
-  uAnthropometry in '..\shared\uAnthropometry.pas',
-  uLagrange3DOF in '..\shared\uLagrange3DOF.pas',
-  uKneeSimEngine in '..\shared\uKneeSimEngine.pas',
+  uBiomechCore in '..\shared\uBiomechCore.pas',
   uMainFormDelphi in 'uMainFormDelphi.pas' {MainFormDelphi},
   uModelFormDelphi in 'uModelFormDelphi.pas' {ModelFormDelphi};
 

@@ -7,7 +7,7 @@
 *.rsj
 *.lps
 lazarus_app/lib/
-lazarus_app/backup/
+backup/
 lazarus_app/KneeExtensionLaz
 lazarus_app/KneeExtensionLaz.res
 tests/test_biomech

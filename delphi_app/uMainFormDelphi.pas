@@ -7,7 +7,7 @@ uses
   System.Classes, System.Types, System.Math, Vcl.Graphics, Vcl.Controls,
   Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls,
   VCLTee.TeEngine, VCLTee.Series, VCLTee.TeeProcs, VCLTee.Chart,
-  uBiomechTypes, uKneeSimEngine, uModelFormDelphi;
+  uBiomechCore, uModelFormDelphi;
 
 type
   TMainFormDelphi = class(TForm)

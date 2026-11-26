@@ -7,6 +7,7 @@ object MainFormLaz: TMainFormLaz
   ClientHeight = 760
   ClientWidth = 1280
   Position = poScreenCenter
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnResize = FormResize
@@ -122,7 +123,6 @@ object MainFormLaz: TMainFormLaz
     Title.Text.Strings = (
       'TAChart'
     )
-    TabOrder = 2
   end
   object chtVel: TChart
     Left = 860
@@ -149,7 +149,6 @@ object MainFormLaz: TMainFormLaz
     Title.Text.Strings = (
       'TAChart'
     )
-    TabOrder = 3
   end
   object chtLength: TChart
     Left = 442
@@ -176,7 +175,6 @@ object MainFormLaz: TMainFormLaz
     Title.Text.Strings = (
       'TAChart'
     )
-    TabOrder = 4
   end
   object chtMusTorque: TChart
     Left = 860
@@ -203,7 +201,6 @@ object MainFormLaz: TMainFormLaz
     Title.Text.Strings = (
       'TAChart'
     )
-    TabOrder = 5
   end
   object chtFvsL: TChart
     Left = 6
@@ -230,7 +227,6 @@ object MainFormLaz: TMainFormLaz
     Title.Text.Strings = (
       'TAChart'
     )
-    TabOrder = 6
   end
   object chtFvsV: TChart
     Left = 324
@@ -257,7 +253,6 @@ object MainFormLaz: TMainFormLaz
     Title.Text.Strings = (
       'TAChart'
     )
-    TabOrder = 7
   end
   object chtGravTorque: TChart
     Left = 642
@@ -284,7 +279,6 @@ object MainFormLaz: TMainFormLaz
     Title.Text.Strings = (
       'TAChart'
     )
-    TabOrder = 8
   end
   object chtLvsV: TChart
     Left = 960
@@ -311,11 +305,10 @@ object MainFormLaz: TMainFormLaz
     Title.Text.Strings = (
       'TAChart'
     )
-    TabOrder = 9
   end
   object TimerSim: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 30
     OnTimer = TimerSimTimer
     Left = 32
     Top = 32

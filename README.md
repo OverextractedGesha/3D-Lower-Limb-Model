@@ -4,11 +4,8 @@ Cross-platform Object Pascal simulation of a 3-joint lower-limb Lagrangian model
 
 ## Project Structure
 
-- `shared/` — Pure Object Pascal computation engine (`{$IFDEF FPC}{$MODE DELPHI}{$ENDIF}`, zero GUI dependencies):
-  - `uBiomechTypes.pas` — Shared records (`TAnthropometricData`, `TMuscleParams`, `TKneeState`, `TLagrange3DOFResult`), `TVector3`, `TMatrix3x3`, physical constants.
-  - `uAnthropometry.pas` — Winter (2009) segmental regression (`L1..3`, `M1..3`, `A1..3`, `I1..3`), seated knee inertia `IKnee`, and `GravMomentCoeff`.
-  - `uLagrange3DOF.pas` — 3-DOF planar open-chain Euler-Lagrange evaluator: symmetric inertia matrix $M(\theta)$, Christoffel Coriolis/centrifugal matrix $C(\theta,\dot{\theta})$, gravity vector $G(\theta)$, and Riener & Edrich (1999) double-exponential passive viscoelastic torques ($\tau_{P1}$ ankle, $\tau_{P2}$ knee, $\tau_{P3}$ hip).
-  - `uKneeSimEngine.pas` — `TKneeSimEngine` with RK4 integration ($\Delta t = 0.001\text{ s}$), Hill-type muscle force-length/force-velocity curves, recruitment, and activation dynamics.
+- `shared/` — Pure Object Pascal computation engine (`{$IFDEF FPC}{$MODE DELPHI}{$ENDIF}`, zero external math/GUI dependencies):
+  - `uBiomechCore.pas` — Single consolidated logic unit containing types/constants, from-scratch math helpers (`Clamp`, `SafeExp`, `SafeTanh`), Winter (2009) anthropometry, 3-DOF planar Euler-Lagrange dynamics ($M$, $C$, $G$, Riener & Edrich 1999 passive torques), and `TKneeSimEngine` (Hill muscle model + RK4 solver).
 - `tests/` — Headless FPC unit test suite (`test_biomech.lpr`).
 - `lazarus_app/` — Linux Lazarus LCL + `TAChart` GUI application (`KneeExtensionLaz.lpi`).
 - `delphi_app/` — Windows Modern Delphi VCL + `VCLTee.Chart` GUI application (`KneeExtensionDelphi.dproj`).

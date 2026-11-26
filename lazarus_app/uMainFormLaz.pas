@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
   ComCtrls, TAGraph, TASeries, TATypes,
-  uBiomechTypes, uKneeSimEngine, uModelFormLaz;
+  uBiomechCore, uModelFormLaz;
 
 type
   TMainFormLaz = class(TForm)
@@ -30,6 +30,7 @@ type
     chtGravTorque: TChart;
     chtLvsV: TChart;
     TimerSim: TTimer;
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormResize(Sender: TObject);
@@ -43,6 +44,7 @@ type
   private
     FEngine: TKneeSimEngine;
     FFESMode: Boolean;
+    FClosing: Boolean;
     FBodyHeightCm: Double;
     FPlotSubStepCounter: Integer;
     serAngle: TLineSeries;
@@ -55,6 +57,8 @@ type
     serLvsV: TLineSeries;
     function SetupChart(AChart: TChart; const ALegendTitle, AXTitle, AYTitle: string;
       AShowPoints: Boolean): TLineSeries;
+    procedure BeginChartsUpdate;
+    procedure EndChartsUpdate;
     procedure ClearAllCharts;
     procedure AppendStateToCharts;
     procedure UpdateStimLabel;
@@ -71,12 +75,20 @@ implementation
 
 const
   SIM_DT = 0.001;         { 1 ms RK4 integration step }
-  STEPS_PER_TICK = 20;    { 20 ms per timer tick -> real-time }
-  PLOT_STRIDE = 5;        { Plot every 5 ms (200 Hz) }
+  STEPS_PER_TICK = 30;    { 30 ms per timer tick -> real-time at ~33 FPS }
+  PLOT_STRIDE = 10;       { Plot every 10 ms (100 Hz) }
   MAX_SIM_TIME = 3.0;     { Stop automatically after 3.0 s }
+
+procedure TMainFormLaz.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+  FClosing := True;
+  TimerSim.Enabled := False;
+  CanClose := True;
+end;
 
 procedure TMainFormLaz.FormCreate(Sender: TObject);
 begin
+  FClosing := False;
   FBodyHeightCm := DEFAULT_BH * 100.0;
   FEngine := TKneeSimEngine.Create(DEFAULT_BW, DEFAULT_BH);
   FFESMode := False;
@@ -173,6 +185,30 @@ begin
   chtFvsV.SetBounds(PAD * 2 + ColW, TopH + PAD, ColW, BotH);
   chtGravTorque.SetBounds(PAD * 3 + ColW * 2, TopH + PAD, ColW, BotH);
   chtLvsV.SetBounds(PAD * 4 + ColW * 3, TopH + PAD, W - (PAD * 4 + ColW * 3) - PAD, BotH);
+end;
+
+procedure TMainFormLaz.BeginChartsUpdate;
+begin
+  chtAngle.DisableRedrawing;
+  chtVel.DisableRedrawing;
+  chtLength.DisableRedrawing;
+  chtMusTorque.DisableRedrawing;
+  chtFvsL.DisableRedrawing;
+  chtFvsV.DisableRedrawing;
+  chtGravTorque.DisableRedrawing;
+  chtLvsV.DisableRedrawing;
+end;
+
+procedure TMainFormLaz.EndChartsUpdate;
+begin
+  chtAngle.EnableRedrawing;
+  chtVel.EnableRedrawing;
+  chtLength.EnableRedrawing;
+  chtMusTorque.EnableRedrawing;
+  chtFvsL.EnableRedrawing;
+  chtFvsV.EnableRedrawing;
+  chtGravTorque.EnableRedrawing;
+  chtLvsV.EnableRedrawing;
 end;
 
 procedure TMainFormLaz.ClearAllCharts;
@@ -369,6 +405,8 @@ end;
 
 procedure TMainFormLaz.btnCloseClick(Sender: TObject);
 begin
+  FClosing := True;
+  TimerSim.Enabled := False;
   Close;
 end;
 
@@ -382,23 +420,31 @@ var
   I: Integer;
   S1: Double;
 begin
-  if FEngine = nil then
-    Exit;
-  S1 := tbStimS1.Position / 100.0;
-  for I := 1 to STEPS_PER_TICK do
+  if FClosing or (FEngine = nil) then
   begin
-    if FEngine.State.Time >= MAX_SIM_TIME then
+    TimerSim.Enabled := False;
+    Exit;
+  end;
+  S1 := tbStimS1.Position / 100.0;
+  BeginChartsUpdate;
+  try
+    for I := 1 to STEPS_PER_TICK do
     begin
-      TimerSim.Enabled := False;
-      Break;
+      if FEngine.State.Time >= MAX_SIM_TIME then
+      begin
+        TimerSim.Enabled := False;
+        Break;
+      end;
+      FEngine.Step(SIM_DT, S1, FFESMode);
+      Inc(FPlotSubStepCounter);
+      if FPlotSubStepCounter >= PLOT_STRIDE then
+      begin
+        FPlotSubStepCounter := 0;
+        AppendStateToCharts;
+      end;
     end;
-    FEngine.Step(SIM_DT, S1, FFESMode);
-    Inc(FPlotSubStepCounter);
-    if FPlotSubStepCounter >= PLOT_STRIDE then
-    begin
-      FPlotSubStepCounter := 0;
-      AppendStateToCharts;
-    end;
+  finally
+    EndChartsUpdate;
   end;
   pbLimb.Invalidate;
 end;
